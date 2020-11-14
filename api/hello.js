@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const API_URL = "https://bio.torre.co/api/bios";
     const { username } = req.query;
 
