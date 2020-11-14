@@ -16,17 +16,17 @@ This is a small project that uses the TORRE.CO BIO API.
 
 # PoC
 
-    * Bootstrap the app.                       [X]
-    * Show Raw Data in console for testing.    [] 
-    * Integrate a Map Visualizer, full screen. [ ]
-        * Choose between GMaps and OpenStreetMap. []
-    * Show a Specific user location by getting the lat/long params from the TORRE.CO BIO API. []
+* Bootstrap the app.                       [X]
+* Show Raw Data in console for testing.    [] 
+* Integrate a Map Visualizer, full screen. [ ]
+    * Choose between GMaps and OpenStreetMap. []
+* Show a Specific user location by getting the lat/long params from the TORRE.CO BIO API. []
 
 # V2 - Improvements.
 
-    * Show all users in the map with a heatmap-ish visualization. []
-    * Given Specific Zoom-in events, replace the heat map by pointers for each user.
-    * onClick over those users, show some details about them .(name, title, etc).
+* Show all users in the map with a heatmap-ish visualization. []
+* Given Specific Zoom-in events, replace the heat map by pointers for each user.
+* onClick over those users, show some details about them .(name, title, etc).
 
 
 ## Project setup
