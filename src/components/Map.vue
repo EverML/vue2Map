@@ -1,101 +1,98 @@
 <template>
+  <div class="container">
+      <div class="search-card">
+        <input class="search" type="text" placeholder="Search User....">
+      </div>
 
-  <div style="height: 500px; width: 100%">
-    <div style="height: 200px overflow: auto;">
-      <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
-      <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
-      <button @click="showLongText">
-        Toggle long popup
-      </button>
-      <button @click="showMap = !showMap">
-        Toggle map
-      </button>
-    </div>
     <l-map
-      v-if="showMap"
       :zoom="zoom"
       :center="center"
-      :options="mapOptions"
-      style="height: 80%"
-      @update:center="centerUpdate"
-      @update:zoom="zoomUpdate"
+      :bounds="bounds"
+      :max-bounds="maxBounds"
     >
-      <l-tile-layer
-        :url="url"
-        :attribution="attribution"
-      />
-      <l-marker :lat-lng="withPopup">
-        <l-popup>
-          <div @click="innerClick">
-            I am a popup
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
-          </div>
-        </l-popup>
-      </l-marker>
-      <l-marker :lat-lng="withTooltip">
-        <l-tooltip :options="{ permanent: true, interactive: true }">
-          <div @click="innerClick">
-            I am a tooltip
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
-          </div>
-        </l-tooltip>
-      </l-marker>
+      <l-tile-layer :noWrap="noWrap" :url="url" :attribution="attribution" />
+      <l-marker :lat-lng="marker" />
     </l-map>
+    <div class="info">
+      Marker is placed at {{ marker.lat }}, {{ marker.lng }}, bounds are
+      {{ bounds }}
+      <br>
+    </div>
   </div>
 </template>
 
 <script>
-import { latLng } from "leaflet";
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import { latLngBounds, latLng } from "leaflet";
+import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 
 export default {
-  name: "Example",
+  name: "SetBounds",
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LPopup,
-    LTooltip
   },
   data() {
     return {
-      zoom: 13,
-      center: latLng(47.41322, -1.219482),
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      center: [47.41322, -1.219482],
+      bounds: latLngBounds([
+        [-90, -180],
+        [90, 180],
+      ]),
+      maxBounds: latLngBounds([
+        [-90, -180],
+        [90, 180],
+      ]),
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
-      currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
-      showParagraph: false,
-      mapOptions: {
-        zoomSnap: 0.5
-      },
-      showMap: true
+      marker: latLng(47.41322, -1.219482),
+      noWrap: true,
+      zoom: 5,
     };
   },
-  methods: {
-    zoomUpdate(zoom) {
-      this.currentZoom = zoom;
-    },
-    centerUpdate(center) {
-      this.currentCenter = center;
-    },
-    showLongText() {
-      this.showParagraph = !this.showParagraph;
-    },
-    innerClick() {
-      alert("Click!");
-    }
-  }
 };
 </script>
+
+<style scoped>
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.info{
+    z-index:1000;
+    position: fixed;
+    bottom: 20px;
+    margin-left:40px;
+    margin-right:20px;
+    border-radius:5px;
+    padding: 10px 0px 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    width: 90%;
+}
+
+
+.search-card{
+  
+    z-index:1000;
+    position: fixed;
+    top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;
+}
+
+.search{
+  display:flex;
+  border:2px solid #AAA;
+  padding:10px;
+  border-radius:5px;
+  padding: 10px 0px 10px 10px;
+}
+</style>
