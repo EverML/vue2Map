@@ -16,8 +16,8 @@ This is a small project that uses the TORRE.CO BIO API.
 
 # PoC
 
-    * Bootstrap the app.                       [ ]
-    * Show Raw Data in console for testing.    [ ] 
+    * Bootstrap the app.                       [X]
+    * Show Raw Data in console for testing.    [] 
     * Integrate a Map Visualizer, full screen. [ ]
         * Choose between GMaps and OpenStreetMap. []
     * Show a Specific user location by getting the lat/long params from the TORRE.CO BIO API. []

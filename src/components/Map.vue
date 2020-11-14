@@ -3,7 +3,7 @@
     <div class="search-card">
       <input
         v-model="text"
-        @input="doSomething"
+        @input="searchUser"
         class="search"
         type="text"
         placeholder="Search User...."
@@ -29,6 +29,7 @@
 <script>
 import { latLngBounds, latLng } from "leaflet";
 import { LMap, LTileLayer } from /*, LMarker, LPopup, LTooltip*/ "vue2-leaflet";
+import TorreService from '../services/TorreService';
 
 export default {
   name: "Map",
@@ -63,9 +64,19 @@ export default {
       console.log(">>>center" + center);
       this.center = center;
     },
-    doSomething() {
-      console.log(this.text);
+    searchUser() {
+      if(this.text.length > 3)
+      {
+        TorreService.getUser(this.text)
+          .then(response =>{
+            console.log(response);
+          })
+          .catch(err=>{
+            console.log(err);
+          });
+      }
     },
+    
   },
 };
 </script>
