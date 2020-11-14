@@ -7,7 +7,7 @@ module.exports = (req, res) => {
         const data = await response.json();
         return res.send(data);
     } catch (error) {
-        res.send(error);
+        return res.send(error);
     }
     
 }
