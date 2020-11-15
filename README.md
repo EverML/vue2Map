@@ -1,4 +1,4 @@
-# Users HEAT MAP - Torre API
+# Users Search - Torre API
 This is a small project that uses the TORRE.CO BIO API.
 
 # Stack
@@ -22,7 +22,7 @@ This is a small project that uses the TORRE.CO BIO API.
 
 * Show all users in the map with a heatmap-ish visualization. []
 * Given Specific Zoom-in events, replace the heat map by pointers for each user. []
-* onClick over those users, show some details about them .(name, title, etc). []
+* onClick over each user, show some details about them .(name, links,bio, etc). [X]
 
 
 ## Project setup
