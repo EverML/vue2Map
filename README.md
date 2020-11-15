@@ -11,17 +11,19 @@ This is a small project that uses the TORRE.CO BIO API.
 
 # PoC
 
-* Bootstrap the app.                              [X]
-* Implement a Service for fetching the torre api. [X]
-* Show Raw Data in console for testing.           [X] 
-* Integrate a Map Visualizer, full screen.        [X]
-    * Choose between GMaps and OpenStreetMap.     [X]
+* Bootstrap the app.                                     [X]
+* Implement a Serverless Service to fetch the torre api. [X]
+* Show Raw Data in console for testing.                  [X] 
+* Integrate a Map Visualizer, full screen.               [X]
+    * Choose between GMaps and OpenStreetMap.            [X]
 * Show a Specific user location by getting the lat/long params from the TORRE.CO BIO API. [x]
 
-# V2 - Improvements.
+# Roadmap - Improvements.
 
-* Show all users in the map with a heatmap-ish visualization. []
-* Given Specific Zoom-in events, replace the heat map by pointers for each user. []
+* Show all users in the map with a heatmap-ish visualization. [ :( ]
+    * Status: I did some tests with heatmaps, need to play around a little bit more with the API's to get the data needed.   
+* Given Specific Zoom-in events, replace the heat map by pointers for each user. [ :(]
+    * Since it was coupled with the heatmap feature, can't put it together either. [ :( ]
 * onClick over each user, show some details about them .(name, links,bio, etc). [X]
 
 
@@ -47,3 +49,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### Demo
+Visit the Demo  [here](https://vue2-map.vercel.app/).

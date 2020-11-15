@@ -20,7 +20,7 @@
       @update:zoom="zoomUpdate"
     >
       <l-tile-layer :noWrap="noWrap" :url="url" />
-      <l-marker :lat-lng="withPopup">
+      <l-marker v-if="showMarker" :lat-lng="withPopup">
         <l-popup>
           <div @click="innerClick">
             <div class="card-container">
@@ -35,7 +35,7 @@
               </div>
               <p><span class="bold">Location:</span> {{ userInfo.location.name }}</p>
               <h3>Bio</h3>
-              <p>{{ userInfo.summaryOfBio }}</p>
+              <p>{{ `${userInfo.summaryOfBio.slice(0,500)}...` }}</p>
             </div>
           </div>
         </l-popup>
@@ -64,6 +64,7 @@ export default {
   data() {
     return {
       showInfo: false,
+      showMarker:false,
       text: "",
       userInfo: {
         name: "",
@@ -114,6 +115,7 @@ export default {
                 response.data.location.longitude
               );
               this.userInfo = response.data;
+              this.showMarker = true;
             }
           })
           .catch((err) => {
