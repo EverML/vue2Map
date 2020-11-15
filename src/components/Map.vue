@@ -22,21 +22,24 @@
     <l-tile-layer :noWrap="noWrap" :url="url" />
       <l-marker :lat-lng="withPopup">
         <l-popup>
-          <div @click="innerClick">
-            I am a popup
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
+          <div>
+            {{userInfo.name}}
+            <ul id="example-1">
+              <li v-for="item in userInfo.links" :key="item.id">
+                <a :href="item.address">{{ item.name }}</a>
+              </li>
+            </ul>
+            <p>{{userInfo.location.name}}</p>
+            <p>{{userInfo.summaryOfBio}}</p>
           </div>
         </l-popup>
       </l-marker>
     </l-map>
-    <div class="info">
+    <div v-if="showInfo" class="info">
       Center is {{ center.lat }}, {{ center.lng }}
       zoom is {{ zoom }}, text is: {{ text }}
       icon position is {{withPopup}}
+      userInfo is {{userInfo}}
     </div>
   </div>
 </template>
@@ -56,8 +59,16 @@ export default {
   },
   data() {
     return {
+      showInfo:false,
       text: "",
-      userInfo: {},
+      userInfo: {
+        name:'',
+        links:'',
+        location:{ 
+          name:''
+        },
+        summaryOfBio:''
+      },
       zoom: 3.5,
       minZoom:3.5,
       center: latLng(-5.3, -44.2),
@@ -78,11 +89,9 @@ export default {
   },
   methods: {
     zoomUpdate(zoom) {
-      console.log(">>>zooom" + zoom);
       this.zoom = zoom;
     },
     centerUpdate(center) {
-      console.log(">>>center" + center);
       this.center = center;
     },
     searchUser() {
@@ -94,7 +103,8 @@ export default {
             this.$Progress.finish();
             if(response.data)
             {
-              this.withPopup = latLng(response.data.latitude,response.data.longitude);
+              this.userInfo = response.data;
+              this.withPopup = latLng(response.data.location.latitude,response.data.location.longitude);
             }
           })
           .catch(err=>{
@@ -103,9 +113,6 @@ export default {
             this.$Progress.fail();
           });
       }
-    },
-    innerClick(){
-      alert(`you've clicked on me`);
     }
   },
 };

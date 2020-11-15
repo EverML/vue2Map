@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     try {
         const response =  await axios.get(`${API_URL}/${username}`);
         
-        res.send(response.data.person.location);
+        res.send(response.data.person);
         
     } catch (error) {
         if (error.response) {
