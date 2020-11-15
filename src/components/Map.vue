@@ -3,7 +3,7 @@
     <div class="search-card">
       <input
         v-model="text"
-        @input="searchUser"
+        @change="searchUser"
         class="search"
         type="text"
         placeholder="Search User...."

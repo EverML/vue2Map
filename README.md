@@ -4,13 +4,8 @@ This is a small project that uses the TORRE.CO BIO API.
 # Stack
 
 * Vue.JS.
-* Google Maps.
 * OpenStreetMap.
-
-
-
-
-
+* Vercel Serverless functions.
 
 # TODO
 
