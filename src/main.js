@@ -3,6 +3,16 @@ import App from './App.vue'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
+import VueProgressBar from 'vue-progressbar';
+import Notifications from 'vue-notification'
+
+Vue.use(Notifications);
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '5px'
+});
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);

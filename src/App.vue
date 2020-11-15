@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <vue-progress-bar></vue-progress-bar>
     <Map />
+    <notifications group="foo" />
   </div>
 </template>
 
