@@ -35,7 +35,7 @@
               </div>
               <p><span class="bold">Location:</span> {{ userInfo.location.name }}</p>
               <h3>Bio</h3>
-              <p>{{ `${userInfo.summaryOfBio.slice(0,500)}...` }}</p>
+              <p>{{ `${userInfo &&  userInfo.summaryOfBio ? userInfo.summaryOfBio.slice(0,500) : ''}...` }}</p>
             </div>
           </div>
         </l-popup>
@@ -119,7 +119,15 @@ export default {
           })
           .catch((err) => {
             console.log(err);
-
+            this.userInfo =  {
+                name: "",
+                links: "",
+                picture: "",
+                location: {
+                  name: "",
+                },
+                summaryOfBio: "",
+              },
             this.$Progress.fail();
           });
 
