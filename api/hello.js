@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
             .status(error.response.status)
             .send(error.response.data);
           } else if (error.request) {
-            res.status()
+            res.status(error.request.status)
             .send(`Can't finish request properly, please try again`);
           } else {
             res.status(500).send('We fucked up');

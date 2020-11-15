@@ -19,35 +19,39 @@
       @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
-    <l-tile-layer :noWrap="noWrap" :url="url" />
+      <l-tile-layer :noWrap="noWrap" :url="url" />
       <l-marker :lat-lng="withPopup">
         <l-popup>
-          <div>
-            {{userInfo.name}}
-            <ul id="example-1">
-              <li v-for="item in userInfo.links" :key="item.id">
-                <a :href="item.address">{{ item.name }}</a>
-              </li>
-            </ul>
-            <p>{{userInfo.location.name}}</p>
-            <p>{{userInfo.summaryOfBio}}</p>
+          <div @click="innerClick">
+            <div class="card-container">
+              <img class="img" :src="userInfo.picture" alt="User Picture" />
+              <h2>{{ userInfo.name }}</h2>
+              <div class="list-container">
+                <ul>
+                  <li v-for="item in userInfo.links" :key="item.id">
+                    <a :href="item.address" target="_blank">{{ item.name }}</a>
+                  </li>
+                </ul>
+              </div>
+              <p><span class="bold">Location:</span> {{ userInfo.location.name }}</p>
+              <h3>Bio</h3>
+              <p>{{ userInfo.summaryOfBio }}</p>
+            </div>
           </div>
         </l-popup>
       </l-marker>
     </l-map>
     <div v-if="showInfo" class="info">
-      Center is {{ center.lat }}, {{ center.lng }}
-      zoom is {{ zoom }}, text is: {{ text }}
-      icon position is {{withPopup}}
-      userInfo is {{userInfo}}
+      Center is {{ center.lat }}, {{ center.lng }} zoom is {{ zoom }}, text is:
+      {{ text }} icon position is {{ withPopup }} userInfo is {{ userInfo }}
     </div>
   </div>
 </template>
 
 <script>
 import { latLngBounds, latLng } from "leaflet";
-import { LMap, LTileLayer,LMarker,LPopup } from "vue2-leaflet";
-import TorreService from '../services/TorreService';
+import { LMap, LTileLayer, LMarker, LPopup } from "vue2-leaflet";
+import TorreService from "../services/TorreService";
 
 export default {
   name: "Map",
@@ -59,18 +63,19 @@ export default {
   },
   data() {
     return {
-      showInfo:false,
+      showInfo: false,
       text: "",
       userInfo: {
-        name:'',
-        links:'',
-        location:{ 
-          name:''
+        name: "",
+        links: "",
+        picture: "",
+        location: {
+          name: "",
         },
-        summaryOfBio:''
+        summaryOfBio: "",
       },
       zoom: 3.5,
-      minZoom:3.5,
+      minZoom: 3.5,
       center: latLng(-5.3, -44.2),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       showParagraph: false,
@@ -79,12 +84,11 @@ export default {
         zoomSnap: 0.5,
       },
       showMap: true,
-      maxBounds:latLngBounds([
+      maxBounds: latLngBounds([
         [-90, -180],
         [90, 180],
       ]),
       withPopup: latLng(47.41322, -1.219482),
-
     };
   },
   methods: {
@@ -95,25 +99,31 @@ export default {
       this.center = center;
     },
     searchUser() {
-      if(this.text.length > 3)
-      {
+      if (this.text.length > 3) {
         this.$Progress.start();
         TorreService.getUser(this.text)
-          .then(response =>{
+          .then((response) => {
             this.$Progress.finish();
-            if(response.data)
-            {
+            if (response.data) {
+              this.center = latLng(
+                response.data.location.latitude,
+                response.data.location.longitude
+              );
+              this.withPopup = latLng(
+                response.data.location.latitude,
+                response.data.location.longitude
+              );
               this.userInfo = response.data;
-              this.withPopup = latLng(response.data.location.latitude,response.data.location.longitude);
             }
           })
-          .catch(err=>{
+          .catch((err) => {
             console.log(err);
 
             this.$Progress.fail();
           });
       }
-    }
+    },
+    innerClick() {},
   },
 };
 </script>
@@ -156,5 +166,28 @@ export default {
   padding: 10px;
   border-radius: 5px;
   padding: 10px 0px 10px 10px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-container{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width:100%;
+}
+
+.img {
+  width: 7.5rem;
+  height: auto;
+  object-fit: cover;
+}
+.bold{
+  font-weight: bold;
 }
 </style>

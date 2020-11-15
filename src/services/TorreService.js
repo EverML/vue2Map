@@ -17,12 +17,12 @@ export default {
             return response;
         } catch (error) {
             Vue.notify({
-                group: 'foo',
+                group: 'torreService',
                 title: error,
                 type:'error'
             });
-
             return error;
         }
+
   },
 };

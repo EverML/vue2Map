@@ -2,7 +2,7 @@
   <div id="app">
     <vue-progress-bar></vue-progress-bar>
     <Map />
-    <notifications group="foo" />
+    <notifications group="torreService" />
   </div>
 </template>
 
