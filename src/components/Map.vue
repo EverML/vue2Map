@@ -12,8 +12,10 @@
 
     <l-map
       :zoom="zoom"
+      :min-zoom="minZoom"
       :center="center"
       :options="mapOptions"
+      :max-bounds="maxBounds"
       @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
@@ -41,7 +43,8 @@ export default {
     return {
       text: "",
       zoom: 3.5,
-      center: latLng(-5.317854245891062, -44.219482),
+      minZoom:3.5,
+      center: latLng(-5.3, -44.2),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       showParagraph: false,
       noWrap: true,
@@ -49,7 +52,7 @@ export default {
         zoomSnap: 0.5,
       },
       showMap: true,
-      bounds: latLngBounds([
+      maxBounds:latLngBounds([
         [-90, -180],
         [90, 180],
       ]),
