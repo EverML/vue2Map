@@ -52,4 +52,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### Demo
+
+![Demo](/gif/test.gif)
+
+
+
+
+
 Visit the Demo  [here](https://vue2-map.vercel.app/).
+
