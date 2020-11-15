@@ -100,7 +100,6 @@ export default {
       this.center = center;
     },
     searchUser() {
-      if (this.text.length > 3) {
         this.$Progress.start();
         TorreService.getUser(this.text)
           .then((response) => {
@@ -123,7 +122,7 @@ export default {
 
             this.$Progress.fail();
           });
-      }
+
     },
     innerClick() {},
   },
